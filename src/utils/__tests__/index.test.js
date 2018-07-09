@@ -1,5 +1,6 @@
-import * as utils from 'utils/';
-import { DURATION_DEFAULTS, TIMER_DEFAULTS } from 'myconstants';
+import * as utils from '../';
+import durationDefaults from '../../constants/DurationDefaults';
+import timerDefaults from '../../constants/TimerDefaults';
 
 // Tests for decrementTimer function
 // 25:00 - 24:59 - Minutes and seconds both need to be change
@@ -83,7 +84,7 @@ it('should increment minutes by step', () => {
     };
 
     expect(
-        utils.incrementTimer(timer, 5, DURATION_DEFAULTS.WORK)
+        utils.incrementTimer(timer, 5, durationDefaults.WORK)
     ).toEqual(output);
 });
 
@@ -99,6 +100,6 @@ it('should increment minutes and seconds upto threshold', () => {
     };
 
     expect(
-        utils.incrementTimer(timer, TIMER_DEFAULTS.INCREMENT_STEP, DURATION_DEFAULTS.WORK)
+        utils.incrementTimer(timer, timerDefaults.INCREMENT_STEP, durationDefaults.WORK)
     ).toEqual(output);
 });

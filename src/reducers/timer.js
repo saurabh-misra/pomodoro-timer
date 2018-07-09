@@ -1,30 +1,29 @@
-import { DURATION_DEFAULTS, TIMER_DEFAULTS } from 'myconstants';
-import { decrementTimer, incrementTimer } from 'utils/'
+import { decrementTimer, incrementTimer } from '../utils'
+import types from '../constants/ActionTypes';
 
 const timer = (state={}, action) => {
     switch(action.type){
-        case 'INITIALIZE_WORK_SESSION':
+        case types.INITIALIZE_WORK_SESSION:
+        case types.INITIALIZE_SHORT_BREAK:
+        case types.INITIALIZE_LONG_BREAK:
             return {
-                minutes: DURATION_DEFAULTS.WORK,
+                minutes: action.minutes,
                 seconds: 0
             };
-        case 'INITIALIZE_SHORT_BREAK':
-            return {
-                minutes: DURATION_DEFAULTS.SHORT_BREAK,
-                seconds: 0
-            };
-        case 'INITIALIZE_LONG_BREAK':
-            return {
-                minutes: DURATION_DEFAULTS.LONG_BREAK,
-                seconds: 0
-            };
-        case 'DECREMENT_TIMER':
+        case types.DECREMENT_TIMER:
             return decrementTimer(state);
-        case 'INCREMENT_TIMER':
-            return incrementTimer(state, TIMER_DEFAULTS.INCREMENT_STEP, action.threshold);
+        case types.INCREMENT_TIMER:
+            return incrementTimer(state, action.step, action.threshold);
+        case types.SET_TIMER:
+            return {
+                minutes: action.minutes,
+                seconds: action.seconds
+            };
         default:
             return state;
     }
 };
 
 export default timer;
+
+export const getTimer = (state) => state;
