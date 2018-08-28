@@ -35,3 +35,24 @@ export const incrementTimer = ({minutes, seconds}, step, threshold) => {
         seconds
     }
 };
+
+export const getWorkSessionDurationValues = () => {
+    const arrValues = [];
+    for(let i = 5 ; i <= 60 ; i=i+5 )
+        arrValues.push(i);
+    return arrValues;
+};
+
+export const getShortBreakSessionDurationValues = () => {
+    const arrValues = [];
+    for(let i = 1 ; i <= 15 ; i++ )
+        arrValues.push(i);
+    return arrValues;
+};
+
+export const getLongBreakThresholdValues = () => {
+    const arrValues = [];
+    for(let i = 1 ; i <= 8 ; i++ )
+        arrValues.push(i);
+    return arrValues;
+};

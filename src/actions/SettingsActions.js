@@ -1,21 +1,33 @@
 import types from '../constants/ActionTypes';
+import { localStorageWrapper } from './wrappers';
 
-export const setWorkSessionDuration = (value) => ({
+let setWorkSessionDuration = (value) => ({
     type: types.SET_WORK_SESSION_DURATION,
-    value
+    value: parseInt(value, 10)
 });
+setWorkSessionDuration = localStorageWrapper(setWorkSessionDuration);
 
-export const setShortBreakSessionDuration = (value) => ({
+let setShortBreakSessionDuration = (value) => ({
     type: types.SET_SHORT_BREAK_SESSION_DURATION,
     value
 });
+setShortBreakSessionDuration = localStorageWrapper(setShortBreakSessionDuration);
 
-export const setLongBreakSessionDuration = (value) => ({
+let setLongBreakSessionDuration = (value) => ({
     type: types.SET_LONG_BREAK_SESSION_DURATION,
     value
 });
+setLongBreakSessionDuration = localStorageWrapper(setLongBreakSessionDuration);
 
-export const setLongBreakThreshold = (value) => ({
+let setLongBreakThreshold = (value) => ({
     type: types.SET_LONG_BREAK_THRESHOLD,
     value
 });
+setLongBreakThreshold = localStorageWrapper(setLongBreakThreshold);
+
+export {
+    setWorkSessionDuration,
+    setShortBreakSessionDuration,
+    setLongBreakSessionDuration,
+    setLongBreakThreshold
+};

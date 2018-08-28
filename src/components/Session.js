@@ -6,10 +6,11 @@ import SessionControls from './SessionControls';
 import {connect} from 'react-redux';
 import * as sessionActions from '../actions/SessionActions';
 import * as timerActions from '../actions/TimerActions';
-import durationDefaults from '../constants/DurationDefaults';
 import timerDefaults from '../constants/TimerDefaults';
 import * as selectors from '../reducers';
 import { showNotification } from '../utils/notifications';
+import TodayStats from './TodayStats';
+import {Link} from 'react-router-dom';
 
 export class Session extends React.Component{
     constructor(props){
@@ -122,6 +123,11 @@ export class Session extends React.Component{
                         onLengthenShortBreak={this.props.onLengthenShortBreak}
                         onShortenLongBreak={this.props.onShortenLongBreak}
                     />
+                    <TodayStats
+                        workSessionCount={this.props.workSessionCounter}
+                    />
+                    <Link to="/statistics">Statistics</Link>
+                    <Link to="/settings">Settings</Link>
                 </div>
             );
         }

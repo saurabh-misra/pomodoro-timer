@@ -1,6 +1,7 @@
 import types from '../constants/ActionTypes';
 import sessionModes from '../constants/SessionModes';
 import durationDefaults from '../constants/DurationDefaults';
+import { localStorageWrapper } from './wrappers';
 
 export const initializeWorkSession = (duration) => ({
     type: types.INITIALIZE_WORK_SESSION,
@@ -33,8 +34,13 @@ export const stopSession = () => ({
     mode: sessionModes.WORK
 });
 
-export const completeSession = (mode) => ({
+let completeSession = (mode) => ({
     type: types.COMPLETE_SESSION,
     mode 
 });
+
+completeSession = localStorageWrapper(completeSession);
+export {
+    completeSession
+};
 

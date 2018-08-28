@@ -39,6 +39,7 @@ export const settings = (state=defaultState, action) => {
 
 export default settings;
 
-export const getWorkSessionDuration = (state) => state.workSessionDuration;
-export const getShortBreakSessionDuration = (state) => state.shortBreakSessionDuration;
-export const getLongBreakSessionDuration = (state) => state.longBreakSessionDuration;
+export const getWorkSessionDuration = state => state.workSessionDuration;
+export const getShortBreakSessionDuration = state => state.shortBreakSessionDuration;
+export const getLongBreakSessionDuration = state => state.longBreakSessionDuration;
+export const getLongBreakThreshold = state => state.longBreakThreshold;
