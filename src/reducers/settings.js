@@ -32,6 +32,8 @@ export const settings = (state=defaultState, action) => {
                 ...state,
                 longBreakThreshold: action.value
             };
+        case types.RESET_TO_DEFAULT:
+            return defaultState;
         default:
             return state;
     }

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
+import BootstrapOutlineButton from './BootstrapOutlineButton';
 
 const ShortBreakSessionControls = ({
     isStarted,
@@ -12,42 +13,42 @@ const ShortBreakSessionControls = ({
     if(isStarted){
         return (
             <div>
-                <button 
+                <BootstrapOutlineButton 
                     onClick={onLengthen}
-                    className="btn-session-controls btn-lengthen">
-                    LENGTHEN
-                </button>
-                <button 
+                    className="btn-session-controls btn-lengthen mr-3">
+                    TAKE A LONG BREAK
+                </BootstrapOutlineButton>
+                <BootstrapOutlineButton 
                     onClick={onPause}
-                    className="btn-session-controls btn-pause">
+                    className="btn-session-controls btn-pause mr-3">
                     PAUSE
-                </button>
-                <button 
+                </BootstrapOutlineButton>
+                <BootstrapOutlineButton 
                     onClick={onStop}
                     className="btn-session-controls btn-stop">
                     STOP
-                </button>
+                </BootstrapOutlineButton>
             </div>
         );    
     }
 
     return (
         <div>
-            <button
+            <BootstrapOutlineButton
                 onClick={onLengthen} 
-                className="btn-session-controls btn-lengthen">
-                LENGTHEN
-            </button>
-            <button 
+                className="btn-session-controls btn-lengthen mr-3">
+                TAKE A LONG BREAK
+            </BootstrapOutlineButton>
+            <BootstrapOutlineButton 
                 onClick={onStart} 
-                className="btn-session-controls btn-start">
+                className="btn-session-controls btn-start mr-3">
                 { isPaused ? 'RESUME' : 'START' }
-            </button>
-            <button 
+            </BootstrapOutlineButton>
+            <BootstrapOutlineButton 
                 onClick={onStop} 
                 className="btn-session-controls btn-stop">
                 SKIP
-            </button>
+            </BootstrapOutlineButton>
         </div>
     );
 };

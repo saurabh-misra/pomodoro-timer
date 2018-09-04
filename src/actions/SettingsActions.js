@@ -25,9 +25,15 @@ let setLongBreakThreshold = (value) => ({
 });
 setLongBreakThreshold = localStorageWrapper(setLongBreakThreshold);
 
+let resetToDefault = () => ({
+    type: types.RESET_TO_DEFAULT
+});
+resetToDefault = localStorageWrapper(resetToDefault);
+
 export {
     setWorkSessionDuration,
     setShortBreakSessionDuration,
     setLongBreakSessionDuration,
-    setLongBreakThreshold
+    setLongBreakThreshold,
+    resetToDefault,
 };

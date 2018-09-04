@@ -10,7 +10,7 @@ import timerDefaults from '../constants/TimerDefaults';
 import * as selectors from '../reducers';
 import { showNotification } from '../utils/notifications';
 import TodayStats from './TodayStats';
-import {Link} from 'react-router-dom';
+import SessionStatusMessage from './SessionStatusMessage';
 
 export class Session extends React.Component{
     constructor(props){
@@ -18,9 +18,10 @@ export class Session extends React.Component{
 
         this.handleTimerStart = this.handleTimerStart.bind(this);
         this.handleTimerPause = this.handleTimerPause.bind(this);
-        this.handleTimerStop = this.handleTimerStop.bind(this);
+        this.handleSessionStop = this.handleSessionStop.bind(this);
         this.handlePullBack = this.handlePullBack.bind(this);
         this.onTimerTick = this.onTimerTick.bind(this);
+        this.handleToggleBreak = this.handleToggleBreak.bind(this);
 
         this.intervalId = '';
     }
@@ -90,8 +91,12 @@ export class Session extends React.Component{
         this.props.pauseSession();
     }
 
-    handleTimerStop(){
+    handleTimerStop() {
         clearInterval(this.intervalId);
+    }
+
+    handleSessionStop() {
+        this.handleTimerStop();
         this.props.stopSession();
         this.props.initializeWorkSession(this.props.workSessionDuration);
     }
@@ -104,13 +109,35 @@ export class Session extends React.Component{
         clearInterval(this.intervalId);
     }
 
+    handleToggleBreak(currMode) {
+        return () => { 
+            switch(currMode) {
+                case sessionModes.SHORT_BREAK:
+                    this.handleTimerStop();
+                    this.props.initializeLongBreakSession(this.props.longBreakSessionDuration);
+                    break;
+                case sessionModes.LONG_BREAK:
+                    this.handleTimerStop();
+                    this.props.initializeShortBreakSession(this.props.shortBreakSessionDuration);
+                    break;
+                default:
+                    break;
+            }
+        };
+    }
+
     render(){
         if(this.props.mode){
             return (
-                <div>
+                <div className={`mt-5 ${ this.props.className}`}>
                     <Timer 
                         minutes={this.props.minutes}
                         seconds={this.props.seconds}
+                    />
+                    <SessionStatusMessage 
+                        mode={this.props.mode}
+                        isSessionStarted={this.props.isStarted}
+                        isSessionPaused={this.props.isPaused}
                     />
                     <SessionControls
                         mode={this.props.mode}
@@ -118,16 +145,16 @@ export class Session extends React.Component{
                         isPaused={this.props.isPaused}
                         onPause={this.handleTimerPause}
                         onStart={this.handleTimerStart}
-                        onStop={this.handleTimerStop}
+                        onStop={this.handleSessionStop}
                         onPullBack={this.handlePullBack}
-                        onLengthenShortBreak={this.props.onLengthenShortBreak}
-                        onShortenLongBreak={this.props.onShortenLongBreak}
+                        onLengthenShortBreak={this.handleToggleBreak(sessionModes.SHORT_BREAK)}
+                        onShortenLongBreak={this.handleToggleBreak(sessionModes.LONG_BREAK)}
                     />
                     <TodayStats
                         workSessionCount={this.props.workSessionCounter}
+                        shortBreakSessionCount={this.props.shortBreakSessionCounter}
+                        longBreakSessionCount={this.props.longBreakSessionCounter}
                     />
-                    <Link to="/statistics">Statistics</Link>
-                    <Link to="/settings">Settings</Link>
                 </div>
             );
         }
@@ -147,6 +174,8 @@ Session.propTypes = {
     minutes: PropTypes.number,
     seconds: PropTypes.number,
     workSessionCounter: PropTypes.number.isRequired,
+    shortBreakSessionCounter: PropTypes.number.isRequired,
+    longBreakSessionCounter: PropTypes.number.isRequired,
     workSessionDuration: PropTypes.number.isRequired,
     shortBreakSessionDuration: PropTypes.number.isRequired,
     longBreakSessionDuration: PropTypes.number.isRequired,
@@ -159,11 +188,9 @@ Session.propTypes = {
     stopSession: PropTypes.func.isRequired,
     completeSession: PropTypes.func.isRequired,
     onPullBack: PropTypes.func.isRequired,
-    onLengthenShortBreak: PropTypes.func.isRequired,
-    onShortenLongBreak: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
     return {
         mode: selectors.getCurrentSessionMode(state),
         isStarted: selectors.getSessionStatus(state).isStarted,
@@ -171,10 +198,13 @@ const mapStateToProps = (state) => {
         minutes: selectors.getTimer(state).minutes,
         seconds: selectors.getTimer(state).seconds,
         workSessionCounter: selectors.getWorkSessionsCount(state, (new Date())),
+        shortBreakSessionCounter: selectors.getShortBreakSessionsCount(state, (new Date())),
+        longBreakSessionCounter: selectors.getLongBreakSessionsCount(state, (new Date())),
         workSessionDuration: selectors.getWorkSessionDuration(state),
         shortBreakSessionDuration: selectors.getShortBreakSessionDuration(state),
         longBreakSessionDuration: selectors.getLongBreakSessionDuration(state),
         longBreakThreshold: state.settings.longBreakThreshold,
+        className: ownProps.className, 
     };
 };
 
@@ -190,8 +220,6 @@ const ConnectedSession = connect(
         completeSession: sessionActions.completeSession,
         onPullBack: timerActions.incrementTimer,
         decrementTimer: timerActions.decrementTimer,
-        onLengthenShortBreak: sessionActions.initializeLongBreakSession,
-        onShortenLongBreak: sessionActions.initializeShortBreakSession,
     }
 )(Session);
 

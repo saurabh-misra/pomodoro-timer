@@ -18,6 +18,7 @@ export const showNotification = (Notification, title, body) => {
             title,
             {
                 body, 
+                icon: 'clock.png',
                 requireInteraction: true // TODO: control from settings
             }
         );

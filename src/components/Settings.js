@@ -14,6 +14,7 @@ import {
     getLongBreakThresholdValues 
 } from '../utils';
 import * as selectors from '../actions/SettingsActions';
+import BootstrapOutlineButton from './BootstrapOutlineButton';
 
 export const Settings = ({
     workSessionDuration,
@@ -24,6 +25,7 @@ export const Settings = ({
     onShortBreakDurationChange,
     onLongBreakDurationChange,
     onLongBreakThresholdChange,
+    onResetToDefault,
 }) => {
     const workSessionDurationValues = getWorkSessionDurationValues();
     const shortBreakDurationValues  = getShortBreakSessionDurationValues();
@@ -51,52 +53,92 @@ export const Settings = ({
     };
 
     return (
-        <section>
+        <section className="mt-2 w-50 mx-auto">
             <h1>Settings</h1>
-            <p>
-                <label>Work Session Duration: </label>
-                <select 
-                    value={workSessionDuration} 
-                    name="select-work-session-duration"
-                    onChange={handleChange('select-work-session-duration')}>
-                    {
-                        workSessionDurationValues.map( item => <option key={item} value={item}>{item}</option> )
-                    }
-                </select>
-            </p>
-            <p>
-                <label>Short Break Session Duration: </label>
-                <select 
-                    value={shortBreakSessionDuration} 
-                    name="select-shortbreak-session-duration"
-                    onChange={handleChange('select-shortbreak-session-duration')}>
-                    {
-                        shortBreakDurationValues.map( item => <option key={item} value={item}>{item}</option> )
-                    }
-                </select>
-            </p>
-            <p>
-                <label>Long Break Session Duration: </label>
-                <select 
-                    value={longBreakSessionDuration} 
-                    name="select-longbreak-session-duration"
-                    onChange={handleChange('select-longbreak-session-duration')}>
-                    {
-                        longBreakDurationValues.map( item => <option key={item} value={item}>{item}</option> )
-                    }
-                </select>
-            </p>
-            <p>
-                <label>Number of work sessions before long break: </label>
-                <select 
-                    value={longBreakThreshold} 
-                    name="select-longbreak-threshold"
-                    onChange={handleChange('select-longbreak-threshold')}>
-                    {
-                        longBreakThresholdValues.map( item => <option key={item} value={item}>{item}</option> )
-                    }
-                </select>
-            </p>
+            <div className="form-group row mt-5">
+                <label 
+                    htmlFor="select-work-session-duration"
+                    className="col col-form-label text-right">
+                    Work Session Duration: 
+                </label>
+                <div className="col">
+                    <select 
+                        value={workSessionDuration} 
+                        name="select-work-session-duration"
+                        id="select-work-session-duration"
+                        onChange={handleChange('select-work-session-duration')}
+                        className="form-control w-25">
+                        {
+                            workSessionDurationValues.map( item => <option key={item} value={item}>{item}</option> )
+                        }
+                    </select>
+                </div>
+            </div>
+            <div className="form-group row">
+                <label 
+                    htmlFor="select-shortbreak-session-duration"
+                    className="col col-form-label text-right">
+                    Short Break Duration: 
+                </label>
+                <div className="col">
+                    <select 
+                        value={shortBreakSessionDuration} 
+                        name="select-shortbreak-session-duration"
+                        id="select-shortbreak-session-duration"
+                        onChange={handleChange('select-shortbreak-session-duration')}
+                        className="form-control w-25">
+                        {
+                            shortBreakDurationValues.map( item => <option key={item} value={item}>{item}</option> )
+                        }
+                    </select>
+                </div>
+            </div>
+            <div className="form-group row">
+                <label
+                    htmlFor="select-longbreak-session-duration"
+                    className="col col-form-label text-right">
+                    Long Break Duration: 
+                </label>
+                <div className="col">
+                    <select 
+                        value={longBreakSessionDuration} 
+                        name="select-longbreak-session-duration"
+                        id="select-longbreak-session-duration"
+                        onChange={handleChange('select-longbreak-session-duration')}
+                        className="form-control w-25">
+                        {
+                            longBreakDurationValues.map( item => <option key={item} value={item}>{item}</option> )
+                        }
+                    </select>
+                </div>
+            </div>
+            <div className="form-group row">
+                <label
+                    htmlFor="select-longbreak-threshold"
+                    className="col col-form-label text-right">
+                    Number of work sessions before long break: 
+                </label>
+                <div className="col">
+                    <select 
+                        value={longBreakThreshold} 
+                        name="select-longbreak-threshold"
+                        id="select-longbreak-threshold"
+                        onChange={handleChange('select-longbreak-threshold')}
+                        className="form-control w-25">
+                        {
+                            longBreakThresholdValues.map( item => <option key={item} value={item}>{item}</option> )
+                        }
+                    </select>
+                </div>
+            </div>
+            <div className="form-group row">
+                <BootstrapOutlineButton
+                    className="mx-auto"
+                    name="btn-reset-to-default"
+                    onClick={onResetToDefault}>
+                    RESET TO DEFAULT    
+                </BootstrapOutlineButton>
+            </div>
         </section>
     )
 };
@@ -109,6 +151,7 @@ Settings.propTypes = {
     onShortBreakDurationChange  : PropTypes.func.isRequired,
     onLongBreakDurationChange   : PropTypes.func.isRequired,
     onLongBreakThresholdChange  : PropTypes.func.isRequired,
+    onResetToDefault            : PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -122,6 +165,7 @@ const mapDispatchToProps = {
     onShortBreakDurationChange  : selectors.setShortBreakSessionDuration, 
     onLongBreakDurationChange   : selectors.setLongBreakSessionDuration,
     onLongBreakThresholdChange  : selectors.setLongBreakThreshold,
+    onResetToDefault            : selectors.resetToDefault,
 };
 
 const ConnectedSettings = connect(mapStateToProps, mapDispatchToProps)(Settings);

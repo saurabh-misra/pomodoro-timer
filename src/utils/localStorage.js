@@ -14,7 +14,8 @@ export const loadState = () => {
         return JSON.parse(strState, (key, value) => {
             if(typeof value === 'string' && !isNaN(Date.parse(value)))
                 return new Date(value)
-            
+            else if(typeof value === 'string' && !isNaN(parseInt(value, 10)))
+                return parseInt(value, 10);
             return value;
         }) || undefined;
     } catch(err) {

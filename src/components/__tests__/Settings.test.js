@@ -4,15 +4,20 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
-import ConnectedSettings, { Settings } from '../Settings';
+import ConnectedSettings, { 
+    Settings 
+} from '../Settings';
 import durationDefaults from '../../constants/DurationDefaults';
 import settingsDefaults from '../../constants/SettingsDefaults';
 import rootReducer, { 
     getWorkSessionDuration,
     getShortBreakSessionDuration,
     getLongBreakSessionDuration,
-    getLongBreakThreshold
-} from '../../reducers'
+    getLongBreakThreshold,
+    getSettings
+} from '../../reducers';
+import { configureStoreForTesting } from '../../configureStore';
+import { defaultState } from '../../reducers/settings'; 
 
 configure({adapter: new Adapter()});
 
@@ -27,6 +32,7 @@ describe('Settings', () => {
             onShortBreakDurationChange  : jest.fn(),
             onLongBreakDurationChange   : jest.fn(),
             onLongBreakThresholdChange  : jest.fn(),
+            onResetToDefault            : jest.fn(),
         };
     
         const enzymeWrapper = shallow(<Settings { ...defaultState }/>);
@@ -45,7 +51,7 @@ describe('Settings', () => {
 
 describe('ConnectedSettings', () => {
     const setupConnectedSettings = () => {
-        const store = createStore(rootReducer);
+        const store = configureStoreForTesting();
         const enzymeWrapper = mount(
             <Provider store={store}>
                 <ConnectedSettings />
@@ -138,5 +144,34 @@ describe('ConnectedSettings', () => {
         // perform assertion to test whether state is updated with selected value
         const longBreakThreshold = getLongBreakThreshold(store.getState());
         expect(longBreakThreshold).toEqual(6);
+    });
+
+    it('should update settings in state if user resets to default', () => {
+        const { store, enzymeWrapper } = setupConnectedSettings();
+
+        // Set the current state to something other than the default state
+        const selectElement1 = enzymeWrapper.find('select[name="select-work-session-duration"]');
+        const selectElement2 = enzymeWrapper.find('select[name="select-shortbreak-session-duration"]');
+        const selectElement3 = enzymeWrapper.find('select[name="select-longbreak-session-duration"]');
+        const selectElement4 = enzymeWrapper.find('select[name="select-longbreak-threshold"]');
+        const event = {
+            target: {
+                value: 13
+            }
+        };
+        selectElement1.simulate('change', event);
+        selectElement2.simulate('change', event);
+        selectElement3.simulate('change', event);
+        selectElement4.simulate('change', event);
+
+        // get the button element for RESET TO DEFAULT
+        const btn = enzymeWrapper.find('button[name="btn-reset-to-default"]');
+
+        // trigger click event
+        btn.simulate('click', event);
+
+        // perform assertion to test whether state is updated with default values
+        const settings = getSettings(store.getState());
+        expect(settings).toEqual(defaultState);
     });
 });

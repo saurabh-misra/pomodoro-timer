@@ -5,30 +5,6 @@ import WorkSessionControls from './WorkSessionControls';
 import ShortBreakSessionControls from './ShortBreakSessionControls';
 import LongBreakSessionControls from './LongBreakSessionControls';
 
-/**
- * Props: 
- * - onPause
- * - onStart
- * - onStop
- * - onPullBack
- * - onLengthenShortBreak
- * - onShortenLongBreak
- * 
- * Render:
- * 
- * Work Mode Initial: Play
- * Work Mode Started: Pause PullBack Stop
- * Work Mode Paused: Resume Pullback Stop
- * 
- * ShortBreak Initial: Play Lengthen Skip
- * ShortBreak Started: Pause Lengthen Stop
- * ShortBreak Paused: Resume Lengthen Stop 
- * 
- * LongBreak Initial: Play Shorten Skip
- * LongBreak Started: Pause Shorten Stop
- * LongBreak Paused: Resume Shorten Stop
- */
-
 const SessionControls = (props) => {
     if(props.mode === sessionModes.WORK){
         return (

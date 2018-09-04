@@ -1,6 +1,5 @@
 import types from '../constants/ActionTypes';
 import sessionModes from '../constants/SessionModes';
-import durationDefaults from '../constants/DurationDefaults';
 import { localStorageWrapper } from './wrappers';
 
 export const initializeWorkSession = (duration) => ({
@@ -15,10 +14,10 @@ export const initializeShortBreakSession = (duration) => ({
     minutes: duration
 });
 
-export const initializeLongBreakSession = () => ({
+export const initializeLongBreakSession = (duration) => ({
     type: types.INITIALIZE_LONG_BREAK,
     mode: sessionModes.LONG_BREAK,
-    minutes: durationDefaults.LONG_BREAK
+    minutes: duration
 });
 
 export const startSession = () => ({

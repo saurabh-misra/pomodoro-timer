@@ -2,21 +2,27 @@ import actionTypes from '../constants/ActionTypes';
 import sessionModes from '../constants/SessionModes';
 import { areDatesEqual } from '../utils/dates';
 
+// Reducer
 const stats = (state=[], action) => {
-    if(action.type === actionTypes.COMPLETE_SESSION){
-        return [
-            ...state,
-            {
-                date: (new Date()),
-                mode: action.mode
-            }
-        ];
+    switch(action.type) {
+        case actionTypes.COMPLETE_SESSION:
+            return [
+                ...state,
+                {
+                    date: (new Date()),
+                    mode: action.mode
+                }
+            ];
+        case actionTypes.DELETE_ALL_STATISTICS:
+            return [];
+        default:
+            return state;
     }
-    return state;
 };
 
 export default stats;
 
+// Selectors
 export const getSessionsCount = mode => (state, date) => {
     if(!state || !state.length)
         return 0;

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Timer.css'
 
 const Timer = ({minutes, seconds}) => (
     <div className="Timer">

@@ -16,6 +16,10 @@ export default rootReducer;
 
 export const getWorkSessionsCount = (state, date) => 
     statsSelectors.getWorkSessionsCount(state.stats, date);
+export const getShortBreakSessionsCount = (state, date) => 
+    statsSelectors.getShortBreakSessionsCount(state.stats, date);
+export const getLongBreakSessionsCount = (state, date) => 
+    statsSelectors.getLongBreakSessionsCount(state.stats, date);
 export const getStats = state => statsSelectors.getStats(state.stats);
 
 export const getTimer = (state) => timerSelectors.getTimer(state.timer);

@@ -1,5 +1,5 @@
 const durationDefaults = {
-    WORK: 1,
+    WORK: 25,
     SHORT_BREAK: 5,
     LONG_BREAK: 15
 };
