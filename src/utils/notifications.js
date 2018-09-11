@@ -19,7 +19,7 @@ export const showNotification = (Notification, title, body) => {
             {
                 body, 
                 icon: 'clock.png',
-                requireInteraction: true // TODO: control from settings
+                requireInteraction: true 
             }
         );
     }
@@ -28,10 +28,6 @@ export const showNotification = (Notification, title, body) => {
 };
 
 export const playSound = () => {
-    // TODO: control from settings
-    // Also, check webpage where notification sound has been downloaded
-    // TODO: probably requires attribution
-    // https://notificationsounds.com/message-tones/to-the-point-568
     var audio = new Audio('to-the-point.mp3');
     audio.play();
 }
