@@ -18,7 +18,7 @@ export const showNotification = (Notification, title, body) => {
             title,
             {
                 body, 
-                icon: 'clock.png',
+                icon: 'images/clock.png',
                 requireInteraction: true 
             }
         );
@@ -28,6 +28,6 @@ export const showNotification = (Notification, title, body) => {
 };
 
 export const playSound = () => {
-    var audio = new Audio('to-the-point.mp3');
+    var audio = new Audio('sounds/to-the-point.mp3');
     audio.play();
 }

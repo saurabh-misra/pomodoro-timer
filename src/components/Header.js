@@ -23,6 +23,16 @@ let Header = ({location}) => (
                             <i className="material-icons">settings</i>
                         </Link>
                     </li>
+                    <li className='nav-item mr-3'>
+                        <a 
+                            className="nav-link" 
+                            href="https://github.com/saurabh-misra/pomodoro-timer" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <i className="material-icons">code</i>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
