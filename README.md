@@ -16,7 +16,7 @@ Built with a Test Driven Development approach. Techonologies used for writing an
 - Enzyme
 
 ## Motivation
-This is a side project that I worked on for some hands-on learning about Redux, React Router and TDD.
+This is a side project that I worked on for some hands-on learning about React, Redux, React Router and TDD.
 
 ## Attributions
 - Icons from [Google Material Icons](https://material.io/tools/icons).
