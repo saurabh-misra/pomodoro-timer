@@ -2,14 +2,13 @@ import React from 'react';
 import { shallow, mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 
 import ConnectedSettings, { 
     Settings 
 } from '../Settings';
 import durationDefaults from '../../constants/DurationDefaults';
 import settingsDefaults from '../../constants/SettingsDefaults';
-import rootReducer, { 
+import { 
     getWorkSessionDuration,
     getShortBreakSessionDuration,
     getLongBreakSessionDuration,

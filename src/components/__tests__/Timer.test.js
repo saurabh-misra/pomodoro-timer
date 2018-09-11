@@ -14,18 +14,18 @@ describe('<Timer />', () => {
     });
 
     it('should render a timer', () => {
-        const minutes = 15;
-        const seconds = 34;
-        const timerText = '15:34';
-        const wrapper = shallow(<Timer minutes={minutes} seconds={seconds}/>);
+        const   minutes     = 15,
+                seconds     = 34,
+                timerText   = '15:34',
+                wrapper     = shallow(<Timer minutes={minutes} seconds={seconds}/>);
         expect(wrapper.text()).toEqual(expect.stringContaining(timerText));
     });
 
     it('should render a timer with leading 0s for seconds', () => {
-        const minutes = 9;
-        const seconds = 5;
-        const timerText = '9:05';
-        const wrapper = shallow(<Timer minutes={minutes} seconds={seconds}/>);
+        const   minutes     = 9,
+                seconds     = 5,
+                timerText   = '9:05',
+                wrapper     = shallow(<Timer minutes={minutes} seconds={seconds}/>);
         expect(wrapper.text()).toEqual(expect.stringContaining(timerText));
     });
 });

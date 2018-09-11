@@ -33,7 +33,7 @@ describe('timer reducer', () => {
     });
 
     it('should handle INITIALIZE_LONG_BREAK action', () => {
-        const action = sessionActions.initializeLongBreakSession();
+        const action = sessionActions.initializeLongBreakSession(durationDefaults.LONG_BREAK);
         const stateAfter = {
             minutes: durationDefaults.LONG_BREAK,
             seconds: 0

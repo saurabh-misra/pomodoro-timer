@@ -1,6 +1,5 @@
 import WorkSessionControls from '../WorkSessionControls';
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { shallow, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -13,10 +12,10 @@ const setup = (
     const props = {
         isStarted,
         isPaused,
-        onStart: jest.fn(),
-        onPause: jest.fn(),
-        onStop: jest.fn(),
-        onPullBack: jest.fn(),
+        onStart     : jest.fn(),
+        onPause     : jest.fn(),
+        onStop      : jest.fn(),
+        onPullBack  : jest.fn(),
     };
     const enzymeWrapper = shallow(<WorkSessionControls {...props}/>);
 
@@ -31,7 +30,7 @@ describe('<WorkSessionControls />', () => {
         const { enzymeWrapper } = setup(false, false);
 
         expect(
-            enzymeWrapper.find('button')
+            enzymeWrapper.find('BootstrapOutlineButton')
         ).toHaveLength(1);
     });
 
@@ -39,7 +38,7 @@ describe('<WorkSessionControls />', () => {
         const { enzymeWrapper } = setup(true, false);
 
         expect(
-            enzymeWrapper.find('button')
+            enzymeWrapper.find('BootstrapOutlineButton')
         ).toHaveLength(3);
     });
 
@@ -47,41 +46,41 @@ describe('<WorkSessionControls />', () => {
         const { enzymeWrapper } = setup(false, true);
 
         expect(
-            enzymeWrapper.find('button')
+            enzymeWrapper.find('BootstrapOutlineButton')
         ).toHaveLength(3);
     });
 
     it('should call event handlers on button click', () => {
         const setupDefault = setup(false, false);
-        setupDefault.enzymeWrapper.find('button.btn-start').simulate('click');
+        setupDefault.enzymeWrapper.find('BootstrapOutlineButton.btn-start').simulate('click');
         expect(
             setupDefault.props.onStart.mock.calls
         ).toHaveLength(1);
 
         let setupStart = setup(true, false);
-        setupStart.enzymeWrapper.find('button.btn-pull-back').simulate('click');
+        setupStart.enzymeWrapper.find('BootstrapOutlineButton.btn-pull-back').simulate('click');
         expect(
             setupStart.props.onPullBack.mock.calls
         ).toHaveLength(1);
-        setupStart.enzymeWrapper.find('button.btn-pause').simulate('click');
+        setupStart.enzymeWrapper.find('BootstrapOutlineButton.btn-pause').simulate('click');
         expect(
             setupStart.props.onPause.mock.calls
         ).toHaveLength(1);
-        setupStart.enzymeWrapper.find('button.btn-stop').simulate('click');
+        setupStart.enzymeWrapper.find('BootstrapOutlineButton.btn-stop').simulate('click');
         expect(
             setupStart.props.onStop.mock.calls
         ).toHaveLength(1);
 
         let setupPause = setup(false, true);
-        setupPause.enzymeWrapper.find('button.btn-pull-back').simulate('click');
+        setupPause.enzymeWrapper.find('BootstrapOutlineButton.btn-pull-back').simulate('click');
         expect(
             setupPause.props.onPullBack.mock.calls
         ).toHaveLength(1);
-        setupPause.enzymeWrapper.find('button.btn-start').simulate('click');
+        setupPause.enzymeWrapper.find('BootstrapOutlineButton.btn-start').simulate('click');
         expect(
             setupPause.props.onStart.mock.calls
         ).toHaveLength(1);
-        setupPause.enzymeWrapper.find('button.btn-stop').simulate('click');
+        setupPause.enzymeWrapper.find('BootstrapOutlineButton.btn-stop').simulate('click');
         expect(
             setupPause.props.onStop.mock.calls
         ).toHaveLength(1);

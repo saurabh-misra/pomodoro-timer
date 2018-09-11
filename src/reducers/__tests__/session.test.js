@@ -153,7 +153,7 @@ describe('session reducer', () => {
             isPaused: false,
             isStarted: false
         };
-        const action = actions.completeSession();
+        const action = actions.ac_completeSession(sessionModes.WORK);
 
         expect(
             session(stateBefore, action)
@@ -171,7 +171,7 @@ describe('session reducer', () => {
             isPaused: false,
             isStarted: false
         };
-        const action = actions.completeSession();
+        const action = actions.ac_completeSession(sessionModes.LONG_BREAK);
 
         expect(
             session(stateBefore, action)

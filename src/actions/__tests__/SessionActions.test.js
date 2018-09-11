@@ -1,7 +1,6 @@
 import * as actions from '../SessionActions';
 import sessionModes from '../../constants/SessionModes';
 import types from '../../constants/ActionTypes';
-import session from '../../reducers/session';
 import durationDefaults from '../../constants/DurationDefaults';
 
 describe('SessionActions', () => {
@@ -27,7 +26,7 @@ describe('SessionActions', () => {
 
     it('should create a INITIALIZE_LONG_BREAK action', () => {
         expect(
-            actions.initializeLongBreakSession()
+            actions.initializeLongBreakSession(durationDefaults.LONG_BREAK)
         ).toEqual({
             type: types.INITIALIZE_LONG_BREAK,
             mode: sessionModes.LONG_BREAK,
@@ -57,14 +56,6 @@ describe('SessionActions', () => {
         ).toEqual({
             type: types.STOP_SESSION,
             mode: sessionModes.WORK
-        });
-    });
-
-    it('should create a COMPLETE_SESSION action', () => {
-        expect(
-            actions.completeSession()
-        ).toEqual({
-            type: types.COMPLETE_SESSION
         });
     });
     

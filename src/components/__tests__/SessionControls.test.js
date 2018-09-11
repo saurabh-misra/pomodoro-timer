@@ -11,13 +11,13 @@ function setup(mode, isStarted=false, isPaused=false){
         mode,
         isStarted,
         isPaused,
-        onPause: jest.fn(),
-        onStart: jest.fn(),
-        onStop: jest.fn(),
-        onPullBack: jest.fn(),
+        onPause             : jest.fn(),
+        onStart             : jest.fn(),
+        onStop              : jest.fn(),
+        onPullBack          : jest.fn(),
         onLengthenShortBreak: jest.fn(),
-        onShortenLongBreak: jest.fn(),
-        onBreakSkip: jest.fn()
+        onShortenLongBreak  : jest.fn(),
+        onBreakSkip         : jest.fn()
     };
 
     const enzymeWrapper = shallow(<SessionControls {...props}/>);

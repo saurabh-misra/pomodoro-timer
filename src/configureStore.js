@@ -23,6 +23,10 @@ export function configureStoreForTesting() {
         setItem: function(){},
         getItem: function(){}
     };
+
+    // mock the Notification API
+    window.Notification = {};
+
     return createStore(rootReducer, applyMiddleware(thunk));
 }
  

@@ -11,7 +11,7 @@ describe('settings reducer', () => {
     });
 
     it('should handle the SET_WORK_SESSION_DURATION action', () => {
-        const action = actions.setWorkSessionDuration(40);
+        const action = actions.ac_setWorkSessionDuration(40);
 
         expect(
             settings(defaultState, action).workSessionDuration
@@ -19,7 +19,7 @@ describe('settings reducer', () => {
     });
 
     it('should handle the SET_SHORT_BREAK_SESSION_DURATION action', () => {
-        const action = actions.setShortBreakSessionDuration(10);
+        const action = actions.ac_setShortBreakSessionDuration(10);
 
         expect(
             settings(defaultState, action).shortBreakSessionDuration
@@ -27,7 +27,7 @@ describe('settings reducer', () => {
     });
     
     it('should handle the SET_LONG_BREAK_SESSION_DURATION action', () => {
-        const action = actions.setLongBreakSessionDuration(20);
+        const action = actions.ac_setLongBreakSessionDuration(20);
 
         expect(
             settings(defaultState, action).longBreakSessionDuration
@@ -35,7 +35,7 @@ describe('settings reducer', () => {
     });
     
     it('should handle the SET_LONG_BREAK_THRESHOLD action', () => {
-        const action = actions.setLongBreakThreshold(6);
+        const action = actions.ac_setLongBreakThreshold(6);
 
         expect(
             settings(defaultState, action).longBreakThreshold
