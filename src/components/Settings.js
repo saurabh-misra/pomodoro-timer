@@ -6,26 +6,33 @@ import {
     getWorkSessionDuration, 
     getShortBreakSessionDuration,
     getLongBreakSessionDuration,
-    getLongBreakThreshold 
+    getLongBreakThreshold,
+    getCurrentSessionMode,
+    getSessionStatus 
 } from '../reducers/';
 import { 
     getWorkSessionDurationValues, 
     getShortBreakSessionDurationValues,
     getLongBreakThresholdValues 
 } from '../utils';
-import * as selectors from '../actions/SettingsActions';
+import * as settingsActions from '../actions/SettingsActions';
+import { setTimer } from '../actions/TimerActions';
 import BootstrapOutlineButton from './BootstrapOutlineButton';
+import sessionModes from '../constants/SessionModes';
 
 export const Settings = ({
     workSessionDuration,
     shortBreakSessionDuration,
     longBreakSessionDuration,
     longBreakThreshold,
+    currentSessionMode,
+    currentSessionStatus,
     onWorkSessionDurationChange,
     onShortBreakDurationChange,
     onLongBreakDurationChange,
     onLongBreakThresholdChange,
     onResetToDefault,
+    setTimer
 }) => {
     const workSessionDurationValues = getWorkSessionDurationValues();
     const shortBreakDurationValues  = getShortBreakSessionDurationValues();
@@ -34,15 +41,30 @@ export const Settings = ({
 
     const handleChange = elementName => event => {
         const elementValue = event.target.value;
+        const { isStarted, isPaused } = currentSessionStatus;
+        const isCurrentSessionIdle = !isStarted && !isPaused;
+
         switch(elementName){
             case 'select-work-session-duration':
                 onWorkSessionDurationChange(elementValue);
+                // update the work timer in the app if the session is idle so that it displays the updated setting. Don't update the timer if the session is in progress
+                if( currentSessionMode === sessionModes.WORK && isCurrentSessionIdle ) {
+                    setTimer( elementValue, 0 );
+                }
                 return;
             case 'select-shortbreak-session-duration':
                 onShortBreakDurationChange(elementValue);
+                // update the short break timer in the app if the session is idle so that it displays the updated setting. Don't update the timer if the session is in progress
+                if( currentSessionMode === sessionModes.SHORT_BREAK && isCurrentSessionIdle ) {
+                    setTimer( elementValue, 0 );
+                }
                 return;
             case 'select-longbreak-session-duration':
                 onLongBreakDurationChange(elementValue);
+                // update the long break timer in the app if the session is idle so that it displays the updated setting. Don't update the timer if the session is in progress
+                if( currentSessionMode === sessionModes.LONG_BREAK && isCurrentSessionIdle ) {
+                    setTimer( elementValue, 0 );
+                }
                 return;
             case 'select-longbreak-threshold':
                 onLongBreakThresholdChange(elementValue);
@@ -147,6 +169,15 @@ Settings.propTypes = {
     shortBreakSessionDuration   : PropTypes.number.isRequired,
     longBreakSessionDuration    : PropTypes.number.isRequired,
     longBreakThreshold          : PropTypes.number.isRequired,
+    currentSessionMode          : PropTypes.oneOf([
+        sessionModes.WORK, 
+        sessionModes.SHORT_BREAK, 
+        sessionModes.LONG_BREAK
+    ]).isRequired,
+    currentSessionStatus        : PropTypes.exact({
+        isStarted : PropTypes.bool.isRequired,
+        isPaused  : PropTypes.bool.isRequired
+    }).isRequired,  
     onWorkSessionDurationChange : PropTypes.func.isRequired,
     onShortBreakDurationChange  : PropTypes.func.isRequired,
     onLongBreakDurationChange   : PropTypes.func.isRequired,
@@ -159,13 +190,16 @@ const mapStateToProps = state => ({
     shortBreakSessionDuration   : getShortBreakSessionDuration(state),
     longBreakSessionDuration    : getLongBreakSessionDuration(state),
     longBreakThreshold          : getLongBreakThreshold(state),
+    currentSessionMode          : getCurrentSessionMode(state),
+    currentSessionStatus        : getSessionStatus(state)
 });
 const mapDispatchToProps = {
-    onWorkSessionDurationChange : selectors.setWorkSessionDuration,
-    onShortBreakDurationChange  : selectors.setShortBreakSessionDuration, 
-    onLongBreakDurationChange   : selectors.setLongBreakSessionDuration,
-    onLongBreakThresholdChange  : selectors.setLongBreakThreshold,
-    onResetToDefault            : selectors.resetToDefault,
+    onWorkSessionDurationChange : settingsActions.setWorkSessionDuration,
+    onShortBreakDurationChange  : settingsActions.setShortBreakSessionDuration, 
+    onLongBreakDurationChange   : settingsActions.setLongBreakSessionDuration,
+    onLongBreakThresholdChange  : settingsActions.setLongBreakThreshold,
+    onResetToDefault            : settingsActions.resetToDefault,
+    setTimer
 };
 
 const ConnectedSettings = connect(mapStateToProps, mapDispatchToProps)(Settings);

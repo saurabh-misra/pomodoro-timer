@@ -36,7 +36,7 @@ const SessionStatusMessage = ({
         switch(mode) {
             case sessionModes.WORK:
                 message = (
-                    <StatusMessage className="bg-danger">
+                    <StatusMessage className="bg-info">
                         Lets get some work done...
                     </StatusMessage>
                 );
