@@ -59,7 +59,7 @@ export class Session extends React.Component{
         else
             body = 'Your break is complete. Time to work.';
 
-        showNotification(Notification, title, body);
+        showNotification(title, body);
     }
 
     initializeNextSession(){
@@ -129,15 +129,15 @@ export class Session extends React.Component{
     render(){
         if(this.props.mode){
             return (
-                <div className={`mt-5 ${ this.props.className}`}>
-                    <Timer 
-                        minutes={this.props.minutes}
-                        seconds={this.props.seconds}
-                    />
+                <div className={`mt-sm-5 mt-md-0 ${ this.props.className}`}>
                     <SessionStatusMessage 
                         mode={this.props.mode}
                         isSessionStarted={this.props.isStarted}
                         isSessionPaused={this.props.isPaused}
+                    />
+                    <Timer 
+                        minutes={this.props.minutes}
+                        seconds={this.props.seconds}
                     />
                     <SessionControls
                         mode={this.props.mode}

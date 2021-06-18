@@ -6,7 +6,7 @@ const TodayStats = ({
     shortBreakSessionCount,
     longBreakSessionCount,
 }) => (
-    <div className="container-fluid fixed-bottom mb-3 text-white-50 w-50">
+    <div>
         <div className="row">
             <div className="col">        
                 <h4>Today</h4>
@@ -34,4 +34,17 @@ TodayStats.propTypes = {
     workSessionCount: PropTypes.number.isRequired
 };
 
-export default TodayStats;
+const TodayStatsResponsive = props => (
+    <div>
+        {/* Desktop Layout */}
+        <div className="d-none d-xl-block container-fluid fixed-bottom mb-3 text-white-50 w-50">
+            <TodayStats {...props} />
+        </div>
+        {/* Mobile and Tablet Layout */}
+        <div className="d-block d-xl-none container-fluid fixed-bottom mb-3 text-white-50">
+            <TodayStats {...props} />
+        </div>
+    </div>
+)
+
+export default TodayStatsResponsive;

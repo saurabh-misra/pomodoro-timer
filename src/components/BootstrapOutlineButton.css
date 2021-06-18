@@ -1,0 +1,15 @@
+/* default styling - for non hover enabled or touch screen devices */
+button:hover {
+  color: #f8f9fa !important;
+  border: 1px solid #f8f9fa !important;
+  background-color: transparent !important;
+}
+
+/* display hover effect only on hover enabled devices */
+@media(hover: hover) {
+  button:hover {
+    color: #212529 !important;
+    background-color: #f8f9fa !important;
+    border-color: #f8f9fa !important;
+  }
+}

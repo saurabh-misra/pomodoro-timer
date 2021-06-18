@@ -1,19 +1,28 @@
-export const checkPermissionStatus = (notificationApi) => notificationApi.permission;
+const areNotificationsSupported = () => 'Notification' in window;
 
-export const askPermission = (notificationApi, permissionStatus) => {
+const checkPermissionStatus = () => {
+    if( areNotificationsSupported() ) {
+        return Notification.permission;
+    }
+
+    return null;
+};
+
+export const askPermission = () => {
+    const permissionStatus = checkPermissionStatus();
+
     switch(permissionStatus){
         case 'default':
-            return notificationApi.requestPermission();
+            return Notification.requestPermission();
         case 'granted':
         case 'denied':
         default:
-            return;
+            return null;
     }
 }
 
-export const showNotification = (Notification, title, body) => {
-    if(checkPermissionStatus(Notification) === 'granted'){
-        playSound();
+export const showNotification = (title, body) => {
+    if( areNotificationsSupported() && checkPermissionStatus(Notification) === 'granted' ){
         return new Notification(
             title,
             {
@@ -23,6 +32,7 @@ export const showNotification = (Notification, title, body) => {
             }
         );
     }
+    playSound();
 
     return null;
 };

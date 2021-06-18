@@ -6,7 +6,7 @@ import ConnectedStatistics from './Statistics';
 import ConnectedSettings from './Settings';
 
 let Content = ({location}) => (
-    <div className="container">
+    <div className="container-fluid">
         <div className="row">
             <div className="col text-center">
                 <ConnectedSession className={ location.pathname === '/' ? '' : 'd-none' }/>

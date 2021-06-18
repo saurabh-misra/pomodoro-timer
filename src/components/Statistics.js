@@ -21,16 +21,27 @@ export const Statistics = ({
     return (
         <div className="container mt-2">
             <div className="row">
-                <div className="col position-relative">
-                    <h1 className="mb-3">
-                        Statistics
+                <div className="col-6">
+                    {/* For tabs and desktop widths */}
+                    <h1 className="d-none d-sm-block mb-3 text-left">
+                        Report
                     </h1>
+                    {/* For mobile widths */}
+                    <h3 className="d-block d-sm-none mb-3 text-left">
+                        Report
+                    </h3>
+                </div>
+                <div className="col-6">
                     <BootstrapOutlineButton 
                         onClick={handleDeleteAll} 
-                        className={`position-absolute r-0 t-0 mt-2  
-                        ${ areStatsPresent ? 'invisible' : '' }`}>
+                        className={`${ areStatsPresent ? 'invisible' : '' } float-right mt-sm-2`}>
                         Delete All
                     </BootstrapOutlineButton>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-12">
+                    <hr className="bg-light mt-0" />
                 </div>
             </div>
             <div className="row">

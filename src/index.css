@@ -17,3 +17,13 @@ body {
 .t-0 {
   top: 0;
 }
+div.nav-item.dropdown div.dropdown-menu {
+  position: absolute;
+  right: 0;
+  left: auto;
+  background: inherit;
+  border-color: inherit;
+}
+#mobile-nav-toggle:after {
+  display: none;
+}

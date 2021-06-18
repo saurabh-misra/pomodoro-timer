@@ -1,3 +1,36 @@
 .Timer {
-    font-size: 10vw;
+    font-size: 6rem;
+    margin-top: 10vh;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
+    .Timer {
+        font-size: 6rem;
+        margin-top: 6vh;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .Timer {
+        font-size: 10rem;
+        margin-top: 15vh;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+    .Timer {
+        font-size: 10rem;
+        margin-top: 20vh;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+    .Timer {
+        font-size: 10rem;
+        margin-top: 10vh;
+    }
 }

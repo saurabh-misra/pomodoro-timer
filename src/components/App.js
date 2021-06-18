@@ -3,13 +3,11 @@ import './App.css';
 import * as notificationApi from '../utils/notifications';
 import Header from './Header';
 import Content from './Content';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   componentDidMount(){
-    notificationApi.askPermission(
-      Notification, 
-      notificationApi.checkPermissionStatus(Notification)
-    );
+    notificationApi.askPermission();
   }
 
   render() {

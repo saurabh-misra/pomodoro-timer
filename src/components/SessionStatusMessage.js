@@ -2,8 +2,16 @@ import React from 'react';
 import sessionModes from '../constants/SessionModes';
 
 const StatusMessage = (props) => (
-    <div className={`text-white p-3 rounded-bottom ${props.className}`}>
-        <h5>{props.children}</h5>
+    <div>
+        {/* Desktop and iPad Pro */}
+        <div className={`d-none d-lg-block text-white p-3 rounded-bottom ${props.className}`}>
+            <h5>{props.children}</h5>
+        </div>
+
+        {/* Mobile and iPad */}
+        <div className={`d-block d-lg-none text-white p-3 rounded ${props.className}`}>
+            <h5>{props.children}</h5>
+        </div>
     </div>
 );
 
@@ -61,8 +69,21 @@ const SessionStatusMessage = ({
     }
 
     return (
-        <div className="fixed-top w-25 mx-auto">
-            { message }
+        <div>
+            {/* Desktop */}
+            <div className="d-none d-xl-block fixed-top w-25 mx-auto">
+                { message }
+            </div>
+
+            {/* iPad Pro */}
+            <div className="d-none d-lg-block d-xl-none fixed-top w-50 mx-auto">
+                { message }
+            </div>
+
+            {/* Mobile and iPad */}
+            <div className="d-block d-lg-none mx-auto">
+                { message }
+            </div>
         </div>
     );
 };

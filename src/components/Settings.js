@@ -1,6 +1,7 @@
 import React        from 'react';
 import { connect }  from 'react-redux';
 import PropTypes    from 'prop-types';
+import './Settings.css';
 
 import { 
     getWorkSessionDuration, 
@@ -75,93 +76,111 @@ export const Settings = ({
     };
 
     return (
-        <section className="mt-2 w-50 mx-auto">
-            <h1>Settings</h1>
-            <div className="form-group row mt-5">
-                <label 
-                    htmlFor="select-work-session-duration"
-                    className="col col-form-label text-right">
-                    Work Session Duration: 
-                </label>
-                <div className="col">
-                    <select 
-                        value={workSessionDuration} 
-                        name="select-work-session-duration"
-                        id="select-work-session-duration"
-                        onChange={handleChange('select-work-session-duration')}
-                        className="form-control w-25">
-                        {
-                            workSessionDurationValues.map( item => <option key={item} value={item}>{item}</option> )
-                        }
-                    </select>
+        <div className="container mt-2">
+            <div className="row">
+                <div className="col-12">
+                    {/* For tabs and desktop widths */}
+                    <h1 className="d-none d-sm-block mb-3 text-left">
+                        Settings
+                    </h1>
+                    {/* For mobile widths */}
+                    <h3 className="d-block d-sm-none mb-3 text-left">
+                        Settings
+                    </h3>
+                    <hr className="bg-light"/>
                 </div>
             </div>
-            <div className="form-group row">
-                <label 
-                    htmlFor="select-shortbreak-session-duration"
-                    className="col col-form-label text-right">
-                    Short Break Duration: 
-                </label>
-                <div className="col">
-                    <select 
-                        value={shortBreakSessionDuration} 
-                        name="select-shortbreak-session-duration"
-                        id="select-shortbreak-session-duration"
-                        onChange={handleChange('select-shortbreak-session-duration')}
-                        className="form-control w-25">
-                        {
-                            shortBreakDurationValues.map( item => <option key={item} value={item}>{item}</option> )
-                        }
-                    </select>
+            <div className="row">
+                <div className="col-12">
+                    <section className="mt-2">
+                        <div className="form-group row mt-5">
+                            <label 
+                                htmlFor="select-work-session-duration"
+                                className="col-6 col-form-label text-right">
+                                Work Session Duration: 
+                            </label>
+                            <div className="col-6">
+                                <select 
+                                    value={workSessionDuration} 
+                                    name="select-work-session-duration"
+                                    id="select-work-session-duration"
+                                    onChange={handleChange('select-work-session-duration')}
+                                    className="form-control">
+                                    {
+                                        workSessionDurationValues.map( item => <option key={item} value={item}>{item}</option> )
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label 
+                                htmlFor="select-shortbreak-session-duration"
+                                className="col-6 col-form-label text-right">
+                                Short Break Duration: 
+                            </label>
+                            <div className="col-6">
+                                <select 
+                                    value={shortBreakSessionDuration} 
+                                    name="select-shortbreak-session-duration"
+                                    id="select-shortbreak-session-duration"
+                                    onChange={handleChange('select-shortbreak-session-duration')}
+                                    className="form-control">
+                                    {
+                                        shortBreakDurationValues.map( item => <option key={item} value={item}>{item}</option> )
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label
+                                htmlFor="select-longbreak-session-duration"
+                                className="col-6 col-form-label text-right">
+                                Long Break Duration: 
+                            </label>
+                            <div className="col-6">
+                                <select 
+                                    value={longBreakSessionDuration} 
+                                    name="select-longbreak-session-duration"
+                                    id="select-longbreak-session-duration"
+                                    onChange={handleChange('select-longbreak-session-duration')}
+                                    className="form-control">
+                                    {
+                                        longBreakDurationValues.map( item => <option key={item} value={item}>{item}</option> )
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <label
+                                htmlFor="select-longbreak-threshold"
+                                className="col-6 col-form-label text-right">
+                                Number of work sessions before long break: 
+                            </label>
+                            <div className="col-6">
+                                <select 
+                                    value={longBreakThreshold} 
+                                    name="select-longbreak-threshold"
+                                    id="select-longbreak-threshold"
+                                    onChange={handleChange('select-longbreak-threshold')}
+                                    className="form-control">
+                                    {
+                                        longBreakThresholdValues.map( item => <option key={item} value={item}>{item}</option> )
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div className="form-group row">
+                            <BootstrapOutlineButton
+                                className="mx-auto"
+                                name="btn-reset-to-default"
+                                onClick={onResetToDefault}>
+                                RESET TO DEFAULT    
+                            </BootstrapOutlineButton>
+                        </div>
+                    </section>
                 </div>
-            </div>
-            <div className="form-group row">
-                <label
-                    htmlFor="select-longbreak-session-duration"
-                    className="col col-form-label text-right">
-                    Long Break Duration: 
-                </label>
-                <div className="col">
-                    <select 
-                        value={longBreakSessionDuration} 
-                        name="select-longbreak-session-duration"
-                        id="select-longbreak-session-duration"
-                        onChange={handleChange('select-longbreak-session-duration')}
-                        className="form-control w-25">
-                        {
-                            longBreakDurationValues.map( item => <option key={item} value={item}>{item}</option> )
-                        }
-                    </select>
-                </div>
-            </div>
-            <div className="form-group row">
-                <label
-                    htmlFor="select-longbreak-threshold"
-                    className="col col-form-label text-right">
-                    Number of work sessions before long break: 
-                </label>
-                <div className="col">
-                    <select 
-                        value={longBreakThreshold} 
-                        name="select-longbreak-threshold"
-                        id="select-longbreak-threshold"
-                        onChange={handleChange('select-longbreak-threshold')}
-                        className="form-control w-25">
-                        {
-                            longBreakThresholdValues.map( item => <option key={item} value={item}>{item}</option> )
-                        }
-                    </select>
-                </div>
-            </div>
-            <div className="form-group row">
-                <BootstrapOutlineButton
-                    className="mx-auto"
-                    name="btn-reset-to-default"
-                    onClick={onResetToDefault}>
-                    RESET TO DEFAULT    
-                </BootstrapOutlineButton>
-            </div>
-        </section>
+            </div>                            
+        </div>
     )
 };
 Settings.propTypes = {
