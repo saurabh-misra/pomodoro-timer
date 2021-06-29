@@ -38,7 +38,7 @@ export const incrementTimer = ({minutes, seconds}, step, threshold) => {
 
 export const getWorkSessionDurationValues = () => {
     const arrValues = [];
-    for(let i = 5 ; i <= 60 ; i=i+5 )
+    for(let i = 5 ; i <= 120 ; i=i+5 )
         arrValues.push(i);
     return arrValues;
 };

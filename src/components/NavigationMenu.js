@@ -39,7 +39,7 @@ class NavigationMenu extends React.Component {
 					{/* Report */}
           <Nav.Link href="/statistics" className={`nav-item ${ location.pathname === '/statistics' ? 'active':'' } d-none d-sm-block`}>
             <Link className="nav-link" to="/statistics">
-              <i className="material-icons">info</i><span className="d-inline-block d-sm-none">&nbsp;Report</span>
+              <i className="material-icons">assessment</i><span className="d-inline-block d-sm-none">&nbsp;Report</span>
             </Link>
           </Nav.Link>
 					{/* Settings */}
@@ -72,7 +72,7 @@ class NavigationMenu extends React.Component {
 						</Link>
 						{/* Report */}
 						<Link className="dropdown-item text-light p-2 pl-3 bg-dark" to="/statistics" onClick={this.hideMobileNavDropdownMenu}>
-							<i className="material-icons float-left mr-2">info</i>&nbsp;Report
+							<i className="material-icons float-left mr-2">assessment</i>&nbsp;Report
 						</Link>
 						{/* Settings */}
 						<Link className="dropdown-item text-light p-2 pl-3 bg-dark" to="/settings" onClick={this.hideMobileNavDropdownMenu}>
