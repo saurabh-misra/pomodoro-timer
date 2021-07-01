@@ -3,13 +3,13 @@ import sessionModes from '../constants/SessionModes';
 
 const StatusMessage = (props) => (
     <div>
-        {/* Desktop and iPad Pro */}
-        <div className={`d-none d-lg-block text-white p-3 rounded-bottom ${props.className}`}>
+        {/* Desktop */}
+        <div className={`d-none d-xl-block text-white p-3 rounded-bottom ${props.className}`}>
             <h5>{props.children}</h5>
         </div>
 
-        {/* Mobile and iPad */}
-        <div className={`d-block d-lg-none text-white p-3 rounded ${props.className}`}>
+        {/* Mobile, iPad and iPad Pro */}
+        <div className={`d-block d-xl-none text-white p-3 rounded ${props.className}`}>
             <h5>{props.children}</h5>
         </div>
     </div>
@@ -75,13 +75,8 @@ const SessionStatusMessage = ({
                 { message }
             </div>
 
-            {/* iPad Pro */}
-            <div className="d-none d-lg-block d-xl-none fixed-top w-50 mx-auto">
-                { message }
-            </div>
-
-            {/* Mobile and iPad */}
-            <div className="d-block d-lg-none mx-auto">
+            {/* Mobile, iPad and iPad Pro */}
+            <div className="d-block d-xl-none mx-auto">
                 { message }
             </div>
         </div>

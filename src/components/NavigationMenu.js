@@ -48,6 +48,12 @@ class NavigationMenu extends React.Component {
               <i className="material-icons">settings</i><span className="d-inline-block d-sm-none">&nbsp;Settings</span>
             </Link>
           </Nav.Link>
+					{/* About */}
+          <Nav.Link href="/about" className={`nav-item ${ location.pathname === '/about' ? 'active':'' } d-none d-sm-block`}>
+            <Link className="nav-link" to="/about">
+              <i className="material-icons">info</i><span className="d-inline-block d-sm-none">&nbsp;About</span>
+            </Link>
+          </Nav.Link>
 					{/* Github */}
           <Nav.Link href="https://github.com/saurabh-misra/pomodoro-timer" 
             target="_blank"
@@ -77,6 +83,10 @@ class NavigationMenu extends React.Component {
 						{/* Settings */}
 						<Link className="dropdown-item text-light p-2 pl-3 bg-dark" to="/settings" onClick={this.hideMobileNavDropdownMenu}>
 							<i className="material-icons float-left mr-2">settings</i>&nbsp;Settings
+						</Link>
+						{/* About */}
+						<Link className="dropdown-item text-light p-2 pl-3 bg-dark" to="/about" onClick={this.hideMobileNavDropdownMenu}>
+							<i className="material-icons float-left mr-2">info</i>&nbsp;About
 						</Link>
 						{/* Github */}
 						<a 
